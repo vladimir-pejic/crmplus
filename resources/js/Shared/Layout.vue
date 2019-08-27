@@ -5,8 +5,8 @@
       <div class="min-h-screen flex flex-col" @click="hideDropdownMenus">
         <div class="md:flex">
           <div class="bg-indigo-darkest md:flex-no-shrink md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
-            <inertia-link class="mt-1 items-center text-white hover:text-purple-300 no-underline hover:no-underline font-bold text-2xl lg:text-4xl" href="/">
-              <img src="logo-white.png" class="fill-white" width="30" /> Shrtd!
+            <inertia-link class="text-white hover:text-purple-300 no-underline hover:no-underline font-bold text-2xl lg:text-2xl" href="/">
+              <img src="logo-white.png" width="30" /> Shrtd!
             </inertia-link>
             <dropdown class="md:hidden" placement="bottom-end">
               <svg class="fill-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
@@ -55,34 +55,34 @@ import Logo from '@/Shared/Logo'
 import MainMenu from '@/Shared/MainMenu'
 
 export default {
-  components: {
-    Dropdown,
-    FlashMessages,
-    Icon,
-    Logo,
-    MainMenu,
-  },
-  props: {
-    title: String,
-  },
-  data() {
-    return {
-      showUserMenu: false,
-      accounts: null,
-    }
-  },
-  watch: {
-    title: {
-      immediate: true,
-      handler(title) {
-        document.title = title ? `${title} | Ping CRM` : 'Ping CRM'
-      },
+    components: {
+        Dropdown,
+        FlashMessages,
+        Icon,
+        Logo,
+        MainMenu,
     },
-  },
-  methods: {
-    hideDropdownMenus() {
-      this.showUserMenu = false
+    props: {
+        title: String,
     },
-  },
+    data() {
+        return {
+            showUserMenu: false,
+            accounts: null,
+        }
+    },
+    watch: {
+        title: {
+            immediate: true,
+            handler(title) {
+                document.title = title ? `${title} | ` + this.$page.platform : this.$page.platform;
+            },
+        },
+    },
+    methods: {
+        hideDropdownMenus() {
+            this.showUserMenu = false
+        },
+    },
 }
 </script>

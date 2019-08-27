@@ -27,6 +27,11 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         return $this->belongsTo(Account::class);
     }
 
+    public function userUrls()
+    {
+        return $this->hasMany(Url::class, 'user_id');
+    }
+
     public function getNameAttribute()
     {
         return $this->first_name.' '.$this->last_name;
@@ -76,7 +81,4 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
         });
     }
 
-    public function urls() {
-        return $this->hasMany(Url::class);
-    }
 }

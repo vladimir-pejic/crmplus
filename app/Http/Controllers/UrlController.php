@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helpers;
 use App\Url;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -40,9 +41,31 @@ class UrlController extends Controller
 
     public function getUrl($url_code) {
         try {
-            return Redirect::to(Url::where('url_code', $url_code)->first()->long_url);
+            $url = Url::where('url_code', $url_code)->first();
+            $url->update(['clicks', $url->clicks++]);
+            return Redirect::to($url->long_url);
         } catch (\Exception $e) {
             return Inertia::render('404');
         }
+    }
+
+
+    public function index()
+    {
+        return Inertia::render('Urls/Index', [
+            'filters' => (new Request)->all('search', 'trashed'),
+            'urls' => Url::where('user_id', Auth::user()->id)
+                ->orderBy('created_at', 'desc')
+                ->filter((new Request)->only('search'))
+                ->paginate()
+        ]);
+    }
+
+    public function create() {
+
+    }
+
+    public function store(Request $request) {
+
     }
 }

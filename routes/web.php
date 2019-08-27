@@ -1,15 +1,8 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::domain('sss.' . env('DOMAIN_NAME', 'shrtd.local'))->group(function () {
+    return 'ok';
+});
 
 // Auth
 Route::get('register', 'Auth\RegisterController@showRegisterForm')->middleware('guest')->name('register');
@@ -25,6 +18,15 @@ Route::post('shorten', 'UrlController@shorten')->name('shorten');
 // Home Links
 Route::get('/')->uses('DashboardController@landing')->name('home');
 Route::get('dashboard')->uses('DashboardController@dashboard')->middleware('auth')->name('dashboard');
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('urls', 'UrlController@index')->name('urls');
+    Route::get('urls/create', 'UrlController@create')->name('urls.create');
+    Route::post('urls/store', 'UrlController@store')->name('urls.store');
+    Route::get('urls/{url}/edit', 'UrlController@create')->name('urls.edit');
+    Route::post('urls/{url}/update', 'UrlController@store')->name('urls.update');
+});
 
 // Users
 Route::get('users')->name('users')->uses('UsersController@index')->middleware('remember', 'auth');

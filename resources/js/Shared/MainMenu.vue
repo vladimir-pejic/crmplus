@@ -19,6 +19,12 @@
       </inertia-link>
     </div>
     <div class="mb-4">
+      <inertia-link class="flex items-center group py-3" :href="route('urls')">
+        <icon name="link" class="w-4 h-4 mr-2" :class="isUrl('urls') ? 'fill-white' : 'fill-indigo-light group-hover:fill-white'" />
+        <div :class="isUrl('urls') ? 'text-white' : 'text-indigo-lighter group-hover:text-white'">URLs</div>
+      </inertia-link>
+    </div>
+    <div class="mb-4">
       <inertia-link class="flex items-center group py-3" :href="route('reports')">
         <icon name="printer" class="w-4 h-4 mr-2" :class="isUrl('reports') ? 'fill-white' : 'fill-indigo-light group-hover:fill-white'" />
         <div :class="isUrl('reports') ? 'text-white' : 'text-indigo-lighter group-hover:text-white'">Reports</div>
