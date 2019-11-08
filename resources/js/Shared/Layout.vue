@@ -6,7 +6,7 @@
         <div class="md:flex">
           <div class="bg-indigo-darkest md:flex-no-shrink md:w-56 px-6 py-4 flex items-center justify-between md:justify-center">
             <inertia-link class="text-white hover:text-purple-300 no-underline hover:no-underline font-bold text-2xl lg:text-2xl" href="/">
-              <img src="logo-white.png" width="30" /> Shrtd!
+              <img :src="getBaseUrl() + '/logo-white-1.png'" width="120" />
             </inertia-link>
             <dropdown class="md:hidden" placement="bottom-end">
               <svg class="fill-white w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" /></svg>
@@ -83,6 +83,9 @@ export default {
         hideDropdownMenus() {
             this.showUserMenu = false
         },
+        getBaseUrl() {
+            return window.location.origin;
+        }
     },
 }
 </script>

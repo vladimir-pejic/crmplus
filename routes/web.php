@@ -21,11 +21,13 @@ Route::get('dashboard')->uses('DashboardController@dashboard')->middleware('auth
 
 
 Route::middleware('auth')->group(function () {
+
     Route::get('urls', 'UrlController@index')->name('urls');
     Route::get('urls/create', 'UrlController@create')->name('urls.create');
     Route::post('urls/store', 'UrlController@store')->name('urls.store');
-    Route::get('urls/{url}/edit', 'UrlController@create')->name('urls.edit');
-    Route::post('urls/{url}/update', 'UrlController@store')->name('urls.update');
+    Route::get('urls/{url}/edit', 'UrlController@edit')->name('urls.edit');
+    Route::post('urls/{url}/update', 'UrlController@update')->name('urls.update');
+
 });
 
 // Users

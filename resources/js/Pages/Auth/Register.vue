@@ -10,11 +10,11 @@
                         <div class="w-1/2 mr-4 w-auto">
                             <text-input v-model="form.organization" :errors="$page.errors.organization" class="mt-6" label="Organization Name" type="text" autofocus autocapitalize="off" />
                             <text-input v-model="form.first_name" :errors="$page.errors.first_name" class="mt-6" label="First Name" type="text" autofocus autocapitalize="off" />
-                            <text-input v-model="form.last_name" :errors="$page.errors.last_name" class="mt-6" label="Last Name" type="text" autofocus autocapitalize="off" />
+                            <text-input v-model="form.password" :errors="$page.errors.password" class="mt-6" label="Password" type="password" />
                         </div>
                         <div class="w-1/2 w-auto">
                             <text-input v-model="form.email" :errors="$page.errors.email" label="Email" class="mt-6" type="email" autofocus autocapitalize="off" />
-                            <text-input v-model="form.password" :errors="$page.errors.password" class="mt-6" label="Password" type="password" />
+                            <text-input v-model="form.last_name" :errors="$page.errors.last_name" class="mt-6" label="Last Name" type="text" autofocus autocapitalize="off" />
                             <text-input v-model="form.password_confirmation" class="mt-6" label="Confirm Password" type="password" />
                         </div>
                     </div>

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Inertia\Inertia;
 
 class UrlController extends Controller
@@ -61,11 +62,31 @@ class UrlController extends Controller
         ]);
     }
 
-    public function create() {
-
+    public function edit(Url $url)
+    {
+        return Inertia::render('Urls/Edit', [
+            'url' => [
+                'id' => $url->id,
+                'url_code' => $url->url_code,
+                'long_url' => $url->long_url,
+                'short_url' => $url->short_url,
+            ],
+        ]);
     }
 
-    public function store(Request $request) {
+    public function update(Url $url)
+    {
+        request()->validate([
+            'url_code' => ['required', 'max:50', Rule::unique('urls')->ignore($url->id)],
+            'long_url' => ['required'],
+        ]);
 
+        $url->update([
+            'url_code' => request()->input('url_code'),
+            'short_url' => env('APP_URL') . '/' . request()->input('url_code'),
+            'long_url' => request()->input('long_url')
+        ]);
+
+        return Redirect::route('urls.edit', $url)->with('success', 'URL updated.');
     }
 }
